@@ -18,7 +18,9 @@ body {
   height: 90%;
   display: flex;
   flex-direction: column;
+  gap: 100px;
   border: 1px solid black;
+  justify-content: center;
 }
 .score-card-container .card-header {
   width: 100%;
@@ -38,7 +40,7 @@ body {
 .score-card-container .card-header .form-group label {
   width: 150px;
   font-family: monospace;
-  font-size: 18px;
+  font-size: 19px;
   text-align: center;
   background-color: inherit;
   color: whitesmoke;
@@ -48,4 +50,19 @@ body {
   height: 38px;
   margin-right: 20px;
   text-align: center;
+}
+.score-card-container table th {
+  width: 5%;
+  height: 50px;
+  text-align: center;
+  border: 1px solid black;
+}
+.score-card-container table tr {
+  height: 50px;
+  text-align: center;
+  border: 1px solid black;
+}
+.score-card-container table td {
+  text-align: center;
+  border: 1px solid black;
 }/*# sourceMappingURL=base.css.map */

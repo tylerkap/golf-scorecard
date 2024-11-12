@@ -83,6 +83,7 @@ let teeSelect = document.getElementById('tee-box-select');
 
 teeSelect.addEventListener('change', () => {
     console.log(teeSelect.value);
+    let currentTeeIndex = teeSelect.value;
 });
 
 
