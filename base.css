@@ -1,1 +1,51 @@
-/*# sourceMappingURL=base.css.map */
+* {
+  margin: 0;
+  padding: 0;
+  background-color: whitesmoke;
+}
+
+body {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.score-card-container {
+  width: 90%;
+  height: 90%;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid black;
+}
+.score-card-container .card-header {
+  width: 100%;
+  height: 60px;
+  background-color: rgb(60, 97, 60);
+  display: flex;
+  justify-content: space-between;
+  border: 2px solid black;
+}
+.score-card-container .card-header .form-group {
+  width: 45%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: inherit;
+}
+.score-card-container .card-header .form-group label {
+  width: 150px;
+  font-family: monospace;
+  font-size: 18px;
+  text-align: center;
+  background-color: inherit;
+  color: whitesmoke;
+}
+.score-card-container .card-header .form-group select {
+  width: 400px;
+  height: 38px;
+  margin-right: 20px;
+  text-align: center;
+}/*# sourceMappingURL=base.css.map */
