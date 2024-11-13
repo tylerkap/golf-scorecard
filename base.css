@@ -26,6 +26,23 @@ body {
   width: 100%;
   height: 70px;
   background-color: wheat;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+.score-card-container .score-header input {
+  width: 200px;
+  height: 50px;
+  border-radius: 5px;
+  padding-left: 10px;
+}
+.score-card-container .score-header button {
+  width: 250px;
+  height: 40px;
+  color: black;
+  border: 2px solid black;
+  background-color: rgb(72, 255, 0);
 }
 .score-card-container .card-header {
   width: 100%;

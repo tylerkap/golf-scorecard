@@ -58,9 +58,7 @@ async function getGolfCourseDetails(golfCourseId) {
       let index = 0;
       let teeBoxSelectHtml = ''
       teeBoxesArray.forEach(function (teeBox, index) {
-         teeBoxSelectHtml += `<option value="${index}">${teeBox.teeType.toUpperCase()}, ${
-           teeBox.totalYards
-         } yards</option>`
+         teeBoxSelectHtml += `<option value="${index}">${teeBox.teeType.toUpperCase()}</option>`
       });
       
       document.getElementById('tee-box-select').innerHTML = teeBoxSelectHtml;
@@ -73,37 +71,81 @@ async function getGolfCourseDetails(golfCourseId) {
 
 getAvailableGolfCourses();
 
-test = {};
-
-
 let courseSelect = document.getElementById('course-select');
 let teeSelect = document.getElementById('tee-box-select');
-let firstNineTotalYardsBox = document.getElementById('firstNine-out');
+let firstNineTotalYardsBox = document.getElementById('y-firstnine-out');
+let firstNineTotalParBox = document.getElementById('p-firstnine-out');
+let firstNineTotalHandicapBox = document.getElementById('h-firstnine-out');
+let backNineTotalYardsBox = document.getElementById('y-backnine-out');
+let backNineTotalParBox = document.getElementById('p-backnine-out');
+let backNineTotalHandicapBox = document.getElementById('h-backnine-out');
+
 test = getAvailableGolfCourses(courseSelect.value);
 
 courseSelect.addEventListener('change', () => {
     getGolfCourseDetails(courseSelect.value).then(result => {
       console.log(result);
       let totalYards = 0;
+      let totalPar = 0;
+      let totalHandicap = 0;
+      let firstNineYards = 0;
+      let firstNinePar = 0;
+      let firstNineHandicap = 0;
 
-      for (let i = 0; i < 9; i++) {
-        let id = `y-${i}`;
-        let box = document.getElementById(id);
+      for (let i = 0; i < 18; i++) {
+        let yardId = `y-${i}`;
+        let parId = `p-${i}`;
+        let handicapId = `h-${i}`;
+        let box = document.getElementById(yardId);
+        let par = document.getElementById(parId);
+        let handicap = document.getElementById(handicapId);
         totalYards += result.holes[i].teeBoxes[teeSelect.value].yards;
+        totalPar += result.holes[i].teeBoxes[teeSelect.value].par;
+        totalHandicap += result.holes[i].teeBoxes[teeSelect.value].hcp;
+        if (i === 8) {
+          firstNineYards = totalYards;
+          firstNinePar = totalPar;
+          firstNineHandicap = totalHandicap;
+        }
         box.innerHTML = result.holes[i].teeBoxes[teeSelect.value].yards;
+        par.innerHTML = result.holes[i].teeBoxes[teeSelect.value].par;
+        handicap.innerHTML = result.holes[i].teeBoxes[teeSelect.value].hcp;
       }
-      firstNineTotalYardsBox.innerHTML = totalYards;
+      firstNineTotalYardsBox.innerHTML = firstNineYards;
+      firstNineTotalParBox.innerHTML = firstNinePar;
+      firstNineTotalHandicapBox.innerHTML = firstNineHandicap;
+      backNineTotalYardsBox.innerHTML = totalYards;
+      backNineTotalParBox.innerHTML = totalPar;
+      backNineTotalHandicapBox.innerHTML = totalHandicap;
 
       teeSelect.addEventListener('change', () => {
           console.log(`This is my teeBoxIndex: ${teeSelect.value}`);
           totalYards = 0;
           for (let j = 0; j < 9; j++) {
-            let id = `y-${j}`;
-            let box = document.getElementById(id);
+            let yardId = `y-${j}`;
+            let parId = `p-${j}`;
+            let handicapId = `h-${j}`;
+            let box = document.getElementById(yardId);
+            let par = document.getElementById(parId);
+            let handicap = document.getElementById(handicapId);
             totalYards += result.holes[j].teeBoxes[teeSelect.value].yards;
+            totalPar += result.holes[j].teeBoxes[teeSelect.value].par;
+            totalHandicap += result.holes[j].teeBoxes[teeSelect.value].hcp;
+            if (j === 8) {
+              firstNineYards = totalYards;
+              firstNinePar = totalPar;
+              firstNineHandicap = totalHandicap;
+            }
             box.innerHTML = result.holes[j].teeBoxes[teeSelect.value].yards;
+            par.innerHTML = result.holes[j].teeBoxes[teeSelect.value].par;
+            handicap.innerHTML = result.holes[j].teeBoxes[teeSelect.value].hcp;
           }
-          firstNineTotalYardsBox.innerHTML = totalYards;
+          firstNineTotalYardsBox.innerHTML = firstNineYards;
+          firstNineTotalParBox.innerHTML = firstNinePar;
+          firstNineTotalHandicapBox.innerHTML = firstNineHandicap;
+          backNineTotalYardsBox.innerHTML = totalYards;
+          backNineTotalParBox.innerHTML = totalPar;
+          backNineTotalHandicapBox.innerHTML = totalHandicap;
       });
     });
 });
