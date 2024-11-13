@@ -65,6 +65,7 @@ async function getGolfCourseDetails(golfCourseId) {
       
       document.getElementById('tee-box-select').innerHTML = teeBoxSelectHtml;
       console.log(json);
+      return json;
     } catch (error) {
       console.error(error.message);
     }
@@ -72,18 +73,43 @@ async function getGolfCourseDetails(golfCourseId) {
 
 getAvailableGolfCourses();
 
+test = {};
+
+
 let courseSelect = document.getElementById('course-select');
+let teeSelect = document.getElementById('tee-box-select');
+let firstNineTotalYardsBox = document.getElementById('firstNine-out');
+test = getAvailableGolfCourses(courseSelect.value);
 
 courseSelect.addEventListener('change', () => {
-    console.log(getGolfCourseDetails(courseSelect.value));
+    getGolfCourseDetails(courseSelect.value).then(result => {
+      console.log(result);
+      let totalYards = 0;
+
+      for (let i = 0; i < 9; i++) {
+        let id = `y-${i}`;
+        let box = document.getElementById(id);
+        totalYards += result.holes[i].teeBoxes[teeSelect.value].yards;
+        box.innerHTML = result.holes[i].teeBoxes[teeSelect.value].yards;
+      }
+      firstNineTotalYardsBox.innerHTML = totalYards;
+
+      teeSelect.addEventListener('change', () => {
+          console.log(`This is my teeBoxIndex: ${teeSelect.value}`);
+          totalYards = 0;
+          for (let j = 0; j < 9; j++) {
+            let id = `y-${j}`;
+            let box = document.getElementById(id);
+            totalYards += result.holes[j].teeBoxes[teeSelect.value].yards;
+            box.innerHTML = result.holes[j].teeBoxes[teeSelect.value].yards;
+          }
+          firstNineTotalYardsBox.innerHTML = totalYards;
+      });
+    });
 });
 
 
-let teeSelect = document.getElementById('tee-box-select');
 
-teeSelect.addEventListener('change', () => {
-    console.log(teeSelect.value);
-    let currentTeeIndex = teeSelect.value;
-});
+
 
 
